@@ -1,0 +1,11 @@
+item,value,ci,p
+Wald LATE (VA change),1.34,"[0.40, 2.27]",0.0050
+2SLS LATE unconditional,1.34,"[0.40, 2.27]",0.0050
+2SLS LATE with covariates,0.78,"[-0.19, 1.76]",0.1160
+First stage (unconditional),0.870,,0.00e+00
+First stage F-stat,30401.5,,
+OLS naive (unconditional),1.06,"[0.85, 1.86]",0.0083
+OLS naive (with covariates),0.87,"[39.71, -0.22]",0.0347
+N total,7802,,
+N pre-2013,3261,,
+N post-2013,4541,,

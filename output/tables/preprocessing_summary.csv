@@ -1,0 +1,7 @@
+step,n_rows,n_patients
+01_raw_load,118255,7802
+02_standardised,118255,7802
+03_drop_missing_va,116530,7802
+04_impute_interval,116530,7802
+05_ethnicity,116530,7802
+06_age_encoding,116530,7802
