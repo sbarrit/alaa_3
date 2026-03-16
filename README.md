@@ -6,7 +6,7 @@ Code for: CPH200B Project — Advaith Veturi, Sami Barrit, Marcus Moen
 
 Causal inference analysis of anti-VEGF treatments for neovascular age-related macular degeneration, using the Moorfields Eye Hospital longitudinal cohort (Fu et al., *JAMA Ophthalmology*, 2021).
 
-This repository implements a **fuzzy regression discontinuity design** exploiting the October 2013 introduction of aflibercept at MEH as a natural experiment, with the treatment era as an instrumental variable for drug assignment.
+For now, this repository only implements a (very weak) **fuzzy regression discontinuity design** exploiting the October 2013 introduction of aflibercept at MEH as a natural experiment, with the treatment era as an instrumental variable for drug assignment.
 
 ## Requirements
 
