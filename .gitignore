@@ -8,5 +8,4 @@ Thumbs.db
 .idea/
 output/results/
 output/logs/
-input/*.csv
 .env
