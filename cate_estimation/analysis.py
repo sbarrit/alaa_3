@@ -1,7 +1,7 @@
 import pandas as pd
 
 # load dataset
-data = 'doi_10_5061_dryad_nvx0k6dqg__v20201105/MEH_AMD_survivaloutcomes_database.csv'
+data = '../input/MEH_AMD_survivaloutcomes_database.csv'
 df = pd.read_csv(data)
 
 # do EDA of data

@@ -283,7 +283,7 @@ class DragonNetWrapper:
     
     def fit(self, X, T, Y):
         from nn_models import DragonNet
-        self.model = DragonNet(input_dim=X.shape[1])
+        self.model = DragonNet(input_dim=X.shape[1], targeted_reg=True)
         self.model.fit(X, T, Y, verbose=False)
         return self
     
@@ -712,7 +712,7 @@ def main():
     
     print("\n>>> PRIMARY ANALYSIS: Full sample (era as covariate)")
     df = load_and_prepare_data(
-        'doi_10_5061_dryad_nvx0k6dqg__v20201105/MEH_AMD_survivaloutcomes_database.csv',
+        '../input/MEH_AMD_survivaloutcomes_database.csv',
         time_horizon_days=730,
         restrict_post_2013=True
     )
@@ -865,43 +865,43 @@ def main():
     print(f"  the expected improvement in P(VA≥70) would be: "
           f"{np.mean(np.abs(primary_tau)):.4f}")
     
-    # =========================================================================
-    # SENSITIVITY ANALYSIS: Post-2013 only
-    # =========================================================================
-    print("\n\n" + "="*70)
-    print("SENSITIVITY ANALYSIS: POST-2013 PATIENTS ONLY")
-    print("="*70)
+    # # =========================================================================
+    # # SENSITIVITY ANALYSIS: Post-2013 only
+    # # =========================================================================
+    # print("\n\n" + "="*70)
+    # print("SENSITIVITY ANALYSIS: POST-2013 PATIENTS ONLY")
+    # print("="*70)
     
-    df_post = load_and_prepare_data(
-        'doi_10_5061_dryad_nvx0k6dqg__v20201105/MEH_AMD_survivaloutcomes_database.csv',
-        time_horizon_days=730,
-        restrict_post_2013=True
-    )
+    # df_post = load_and_prepare_data(
+    #     '../input/MEH_AMD_survivaloutcomes_database.csv',
+    #     time_horizon_days=730,
+    #     restrict_post_2013=False
+    # )
     
-    print(f"\nPost-2013 analysis sample: {len(df_post)} patients")
-    print(f"  Aflibercept: {(df_post['treatment']==1).sum()}")
-    print(f"  Ranibizumab: {(df_post['treatment']==0).sum()}")
+    # print(f"\nPost-2013 analysis sample: {len(df_post)} patients")
+    # print(f"  Aflibercept: {(df_post['treatment']==1).sum()}")
+    # print(f"  Ranibizumab: {(df_post['treatment']==0).sum()}")
     
-    X_post, T_post, Y_post, fn_post = get_feature_matrix(df_post)
+    # X_post, T_post, Y_post, fn_post = get_feature_matrix(df_post)
     
-    # Note: severe imbalance — flag this
-    imbalance_ratio = (T_post == 1).sum() / (T_post == 0).sum()
-    print(f"\n  WARNING: Treatment ratio (AFB/RBZ) = {imbalance_ratio:.1f}:1")
-    print(f"  This severe imbalance limits the reliability of CATE estimates.")
-    print(f"  The primary analysis (full sample) is preferred.\n")
+    # # Note: severe imbalance — flag this
+    # imbalance_ratio = (T_post == 1).sum() / (T_post == 0).sum()
+    # print(f"\n  WARNING: Treatment ratio (AFB/RBZ) = {imbalance_ratio:.1f}:1")
+    # print(f"  This severe imbalance limits the reliability of CATE estimates.")
+    # print(f"  The primary analysis (full sample) is preferred.\n")
     
-    if (T_post == 0).sum() >= 50:  # Only run if enough control patients
-        e_post, _ = estimate_propensity_scores(X_post, T_post, fn_post)
+    # if (T_post == 0).sum() >= 50:  # Only run if enough control patients
+    #     e_post, _ = estimate_propensity_scores(X_post, T_post, fn_post)
         
-        for name, EstClass in {'X-Learner': XLearner, 'T-Learner': TLearner, 'DragonNet': DragonNetWrapper}.items():
-            tau_post = cross_fitted_cate(X_post, T_post, Y_post, EstClass, n_splits=5)
-            print(f"  {name} — Mean CATE: {tau_post.mean():+.4f}, "
-                  f"Std: {tau_post.std():.4f}, "
-                  f"% favoring AFB: {100*(tau_post > 0).mean():.1f}%")
+    #     for name, EstClass in {'X-Learner': XLearner, 'T-Learner': TLearner, 'DragonNet': DragonNetWrapper}.items():
+    #         tau_post = cross_fitted_cate(X_post, T_post, Y_post, EstClass, n_splits=5)
+    #         print(f"  {name} — Mean CATE: {tau_post.mean():+.4f}, "
+    #               f"Std: {tau_post.std():.4f}, "
+    #               f"% favoring AFB: {100*(tau_post > 0).mean():.1f}%")
     
-    print("\n" + "="*70)
-    print("ANALYSIS COMPLETE")
-    print("="*70)
+    # print("\n" + "="*70)
+    # print("ANALYSIS COMPLETE")
+    # print("="*70)
 
 
 if __name__ == '__main__':
