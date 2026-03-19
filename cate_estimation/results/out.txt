@@ -1,0 +1,178 @@
+======================================================================
+CATE ESTIMATION: AFLIBERCEPT vs RANIBIZUMAB
+Outcome: P(VA ≥ 70 within 2 years)
+======================================================================
+
+>>> PRIMARY ANALYSIS: Full sample (era as covariate)
+
+Analysis sample: 2156 patients
+  Aflibercept: 1959
+  Ranibizumab: 197
+  Reached VA≥70 within 2yr: 1426.0 (66.1%)
+  By treatment:
+    Aflibercept: 0.662 (1296.0/1959)
+    Ranibizumab: 0.660 (130.0/197)
+
+======================================================================
+PROPENSITY SCORE ESTIMATION
+======================================================================
+
+Propensity model coefficients:
+  va_inj1                  : +0.119
+  age_ordinal              : +0.250
+  female                   : -0.065
+  loaded_binary            : -0.001
+  mean_inj_interval        : -0.051
+  post_2013                : +0.000
+  eth_caucasian            : -0.027
+  eth_mixed                : +0.195
+  eth_se_asian             : -0.029
+  eth_unknown/other        : +0.024
+
+Propensity score summary (T=1: aflibercept):
+  T=0 (ranibizumab): mean=0.904, median=0.911, range=[0.797, 0.948]
+  T=1 (aflibercept): mean=0.909, median=0.914, range=[0.726, 0.998]
+
+  Patients with e(x) in [0.05, 0.95]: 2146 / 2156 (99.5%)
+  Propensity model AUC: 0.555
+
+======================================================================
+NAIVE & IPW ATE ESTIMATES (SANITY CHECKS)
+======================================================================
+
+  Naive difference in means: +0.0017
+  IPW ATE: -0.0227 (95% CI: [-0.1523, +0.1027])
+
+  Fitting T-learner for AIPW outcome models...
+  AIPW ATE: -0.0207 (95% CI: [-0.0447, +0.0032])
+
+======================================================================
+CATE ESTIMATION (CROSS-FITTED)
+======================================================================
+
+  Fitting S-Learner...
+    Mean CATE: -0.0144
+    Std CATE:  0.1105
+    Range:     [-0.5345, +0.3818]
+    % favoring aflibercept: 36.4%
+
+  Fitting T-Learner...
+    Mean CATE: -0.0409
+    Std CATE:  0.3227
+    Range:     [-0.9864, +0.9251]
+    % favoring aflibercept: 32.2%
+
+  Fitting TARNet...
+    Mean CATE: -0.0036
+    Std CATE:  0.0975
+    Range:     [-0.5505, +0.3280]
+    % favoring aflibercept: 48.1%
+
+  Fitting DragonNet...
+    Mean CATE: -0.0225
+    Std CATE:  0.0667
+    Range:     [-0.3180, +0.1456]
+    % favoring aflibercept: 33.2%
+
+  Fitting X-Learner...
+    Mean CATE: -0.0188
+    Std CATE:  0.2621
+    Range:     [-1.4132, +0.7687]
+    % favoring aflibercept: 43.2%
+
+======================================================================
+ATE CONSISTENCY CHECK
+======================================================================
+
+  Method                Mean CATE
+  ------------------------------
+  Naive...............    +0.0017
+  IPW.................    -0.0227
+  AIPW................    -0.0207
+  S-Learner...........    -0.0144
+  T-Learner...........    -0.0409
+  TARNet..............    -0.0036
+  DragonNet...........    -0.0225
+  X-Learner...........    -0.0188
+
+======================================================================
+GENERATING VISUALIZATIONS
+======================================================================
+  Saved: fig_cate_distributions.png
+  Saved: fig_cate_subgroups.png
+  Saved: fig_cate_heatmap.png
+  Saved: heatmaps for all methods
+  Saved: fig_treatment_rule.png
+  Saved: fig_calibration.png
+
+======================================================================
+CATE SUMMARY BY SUBGROUP (X-Learner)
+======================================================================
+
+  Subgroup                             Mean CATE      N
+  ---------------------------------------------------
+  Age 50-59                             -0.0624     67
+  Age 60-69                             -0.0780    275
+  Age 70-79                             -0.0535    733
+  Age >80                               +0.0226   1081
+
+  VA ≤ 35                                +0.0073    317
+  VA 36-49                               -0.0254    400
+  VA 50-69                               -0.0227   1439
+
+  Loaded (induction complete)            -0.0040   1979
+  Not loaded                             -0.1843    177
+
+======================================================================
+TREATMENT RULE VALUE ESTIMATION
+======================================================================
+
+  Patients recommended aflibercept: 932 (43.2%)
+  Patients recommended ranibizumab: 1224 (56.8%)
+
+  If all these patients could switch to the recommended drug,
+  the expected improvement in P(VA≥70) would be: 0.1959
+
+
+======================================================================
+SENSITIVITY ANALYSIS: POST-2013 PATIENTS ONLY
+======================================================================
+
+Post-2013 analysis sample: 2156 patients
+  Aflibercept: 1959
+  Ranibizumab: 197
+
+  WARNING: Treatment ratio (AFB/RBZ) = 9.9:1
+  This severe imbalance limits the reliability of CATE estimates.
+  The primary analysis (full sample) is preferred.
+
+
+======================================================================
+PROPENSITY SCORE ESTIMATION
+======================================================================
+
+Propensity model coefficients:
+  va_inj1                  : +0.119
+  age_ordinal              : +0.250
+  female                   : -0.065
+  loaded_binary            : -0.001
+  mean_inj_interval        : -0.051
+  post_2013                : +0.000
+  eth_caucasian            : -0.027
+  eth_mixed                : +0.195
+  eth_se_asian             : -0.029
+  eth_unknown/other        : +0.024
+
+Propensity score summary (T=1: aflibercept):
+  T=0 (ranibizumab): mean=0.904, median=0.911, range=[0.797, 0.948]
+  T=1 (aflibercept): mean=0.909, median=0.914, range=[0.726, 0.998]
+
+  Patients with e(x) in [0.05, 0.95]: 2146 / 2156 (99.5%)
+  Propensity model AUC: 0.555
+  X-Learner — Mean CATE: -0.0188, Std: 0.2621, % favoring AFB: 43.2%
+  T-Learner — Mean CATE: -0.0409, Std: 0.3227, % favoring AFB: 32.2%
+  DragonNet — Mean CATE: -0.0208, Std: 0.0714, % favoring AFB: 29.5%
+
+======================================================================
+ANALYSIS COMPLETE
+======================================================================
