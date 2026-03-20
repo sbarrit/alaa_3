@@ -42,11 +42,11 @@ The Conley, Hansen, and Rossi (2012) framework relaxes the exclusion restriction
 
 Post-2013 propensity scores ranged from 0.58 to 0.93, reflecting 87% aflibercept prevalence; IPW reweighting reduced all covariate standardized mean differences below 0.10. For VA change, the AIPW ATE was +0.96 letters (95% CI: −0.47 to +2.40, p = 0.19). For VA ≥ 70, the IPCW-corrected ATE was +15.3 percentage points (95% CI: +9.7 to +20.9, p < 0.001). Propensity-score trimming at ≤ 0.85 (n = 961) halved this to +7.7 percentage points (95% CI: −4.2 to +19.5, p = 0.20). The augmented cohort (n = 7,802) yielded a VA change ATE of +1.01 letters (95% CI: +0.15 to +1.87, p = 0.021), but the IPW-only ATE (−0.094) and outcome-only ATE (+0.142) diverged in sign. The era exchangeability check found no effect on VA change among ranibizumab-only patients (p = 0.98) but a significant era effect on VA ≥ 70 (−0.154, p = 0.0003).
 
-![Propensity score distributions and IPW weight diagnostics for the post-2013 cohort, showing limited overlap (PS 0.57–0.93) and the positivity problem.](figures/ate_propensity_overlap.png)
+![Propensity score distributions and IPW weight diagnostics for the post-2013 cohort, showing limited overlap (PS 0.57–0.93) and the positivity problem.](figures/propensity_scores.png)
 
 *Figure 1. Propensity score distributions and IPW weights in the post-2013 cohort.*
 
-![Forest plot of AIPW estimates across outcomes (VA change, VA ≥ 70, VA ≤ 35) and specifications (post-2013, PS-trimmed, augmented).](figures/ate_forest.png)
+![Forest plot of AIPW estimates across outcomes (VA change, VA ≥ 70, VA ≤ 35) and specifications (post-2013, PS-trimmed, augmented).](figures/forest_plot.png)
 
 *Figure 2. Forest plot of doubly-robust treatment effect estimates across outcomes and specifications.*
 
