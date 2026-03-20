@@ -1,16 +1,16 @@
 """
-run_sensitivity.py — Conley-Hansen-Rossi (2012) Exclusion Restriction
-                     Sensitivity Analysis
+run_sensitivity.py — Exclusion-Restriction Sensitivity Analysis
+                     (Conley et al., 2012)
 
 Addresses the known weakness of the RDD/IV analysis: the October 2013 cutoff
 changed both the drug (ranibizumab -> aflibercept) AND the dosing protocol
 (PRN -> treat-and-extend), violating the exclusion restriction.
 
-The CHR framework relaxes the standard IV exclusion restriction by allowing
+The framework (Conley et al., 2012) relaxes the standard IV exclusion restriction by allowing
 the instrument (era) to have a direct effect on the outcome (gamma):
 
     Standard:   Y = Xb + Dt + e,         E[Ze] = 0
-    CHR:        Y = Xb + Dt + Zg + e,    E[Ze] = 0
+    Relaxed:    Y = Xb + Dt + Zg + e,    E[Ze] = 0
 
 The adjusted LATE becomes:  LATE(g) = (ITT - g) / first_stage
 
@@ -864,7 +864,7 @@ if "va_change" in chr_results:
 
     ax.set_xlabel("γ (direct effect of era on outcome)")
     ax.set_ylabel("LATE (ETDRS letters)")
-    ax.set_title("CHR Sensitivity Analysis: VA Change")
+    ax.set_title("Exclusion-Restriction Sensitivity Analysis: VA Change")
     ax.legend(loc="upper right", fontsize=8)
     fig.tight_layout()
     fig.savefig(OUT_FIGURES / "chr_sensitivity.png")
@@ -940,7 +940,7 @@ if n_outcomes > 0:
         col_idx = idx % ncols
         axes[row_idx][col_idx].set_visible(False)
 
-    fig.suptitle("CHR Sensitivity Analysis: All Outcomes", fontsize=13, y=1.02)
+    fig.suptitle("Exclusion-Restriction Sensitivity Analysis: All Outcomes", fontsize=13, y=1.02)
     fig.tight_layout()
     fig.savefig(OUT_FIGURES / "multi_outcome_sensitivity.png",
                 bbox_inches="tight")
